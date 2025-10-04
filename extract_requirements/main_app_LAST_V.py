@@ -1,3 +1,29 @@
+'''
+if you need more information please you can contact me imadmaalouf02@gmail.com or 0642781650 
+just send me a message in email or whatsapp
+
+'''
+
+'''
+please read the readme file for more information about how to use the tool and the features of the tool
+and olso read what i wirte here in the code as a comment this is important information that will help you to use the tool and understand it better
+'''
+
+'''
+You can use the lighning ia to run all the content in the notebook you can create a simple account and the free version is enough ghtning.ai
+and you can run the code using the lighning ia just  dowload the code and upload it to the lighning ia and run it there
+you don't need to install anything in your local machine and olso in the lighning ia you don't need to install streamlit 
+it is already installed defaulltly in the lighning framework you need just to open tge studio and go to the + in the right 
+of the window and click on the + and then click on the streamlit  and  it's done
+but if you use your local machine you need to install the requirements in the requirements.txt file
+and olso you need to install streamlit in your local machine
+you can install it using the command pip install streamlit
+and then you can run the code using the command streamlit run main_app_LAST_V.py    
+
+'''
+
+
+
 import streamlit as st
 import pandas as pd
 import re
