@@ -1,4 +1,4 @@
-# Enhanced Automotive Requirements Extractor
+# 🚗 Enhanced Automotive Requirements Extractor
 
 ## Overview
 
@@ -18,7 +18,7 @@ This tool solves these problems by:
 - Providing confidence scoring for extraction quality
 - Enabling quick export to CSV/Excel for further processing
 
-##  Key Features
+## 🌟 Key Features
 
 ### 1. **Accurate Page Mapping**
 - Uses advanced algorithms to track page numbers in Word documents
@@ -144,18 +144,85 @@ requirement_id_patterns = {
 
 ### Confidence Scoring Algorithm
 
+The confidence score is a quality metric (0.0 to 1.0) that indicates how reliable each extracted requirement is. Higher scores mean higher confidence in the extraction accuracy.
+
 ```python
 def _calculate_confidence(req_id, description):
-    confidence = 1.0
+    confidence = 1.0  # Start at perfect confidence
     
-    # Penalties
-    if len(description) < 20: confidence *= 0.7
-    if is_header_text(description): confidence *= 0.8
+    # PENALTY 1: Short descriptions (likely incomplete)
+    if len(description) < 20:
+        confidence *= 0.7  # Reduce by 30%
     
-    # Bonuses
-    if has_structured_id(req_id): confidence *= 1.1
+    # PENALTY 2: Header-like text (likely not a real requirement)
+    if contains_header_keywords(description):
+        confidence *= 0.8  # Reduce by 20%
     
-    return min(confidence, 1.0)
+    # BONUS: Well-structured requirement ID
+    if matches_strict_format(req_id):
+        confidence *= 1.1  # Increase by 10%
+    
+    return min(confidence, 1.0)  # Cap at 1.0
+```
+
+**Detailed Scoring Breakdown:**
+
+| Condition | Impact | Multiplier | Reason |
+|-----------|--------|------------|--------|
+| **Base Score** | Starting point | 1.0 | Every requirement starts perfect |
+| **Short Description** (<20 chars) | -30% | ×0.7 | Likely table header or incomplete text |
+| **Header Keywords** (e.g., "Description", "Requirement") | -20% | ×0.8 | Probably a column header, not actual requirement |
+| **Well-Structured ID** (e.g., `ABC-DEF-GHI-123`) | +10% | ×1.1 | Follows strict formatting = more reliable |
+| **Maximum Cap** | N/A | 1.0 | Score cannot exceed perfect confidence |
+
+**Example Calculations:**
+
+**Example 1: Perfect Extraction**
+```
+ID: WAVE5-AVAS-ST-FUNC-001
+Description: "The system shall emit acoustic warning when vehicle speed is below 20 km/h"
+Length: 75 characters ✓
+No header keywords ✓
+Well-structured ID ✓
+
+Calculation: 1.0 × 1.1 = 1.1 → capped at 1.0
+Final Score: 1.00 (100% confidence)
+```
+
+**Example 2: Short Description**
+```
+ID: REQ-12345
+Description: "Speed check"
+Length: 11 characters ✗
+No header keywords ✓
+Standard ID format ✓
+
+Calculation: 1.0 × 0.7 = 0.7
+Final Score: 0.70 (70% confidence)
+```
+
+**Example 3: Header Row Detected**
+```
+ID: ID
+Description: "Requirement Description"
+Length: 23 characters ✓
+Contains "Requirement" and "Description" ✗
+Not well-structured ✗
+
+Calculation: 1.0 × 0.8 = 0.8
+Final Score: 0.80 (80% confidence)
+```
+
+**Example 4: Multiple Issues**
+```
+ID: R-01
+Description: "Libellé"
+Length: 7 characters ✗
+Contains "Libellé" (French for "Description") ✗
+Simple ID format ✗
+
+Calculation: 1.0 × 0.7 × 0.8 = 0.56
+Final Score: 0.56 (56% confidence)
 ```
 
 ### Deduplication
@@ -349,9 +416,7 @@ Result: 234 high-confidence requirements
 - [ ] ML-based requirement classification
 - [ ] Collaborative review features
 
-## 📄 License
 
-This tool is provided as-is for automotive industry use. Modify and distribute according to your organization's policies.
 
 ## 👥 Support
 
@@ -372,13 +437,9 @@ For issues, questions, or feature requests:
 - `openpyxl>=3.0.0`
 - `plotly>=5.10.0`
 
-**System Requirements**:
-- RAM: 4GB minimum (8GB recommended)
-- Storage: 100MB for installation
-- Browser: Modern web browser (Chrome, Firefox, Edge)
 
 ---
 
 **Version**: 1.0  
-**Last Updated**: 01/05/2025  
+**Last Updated**: 15/05/2025  
 **Category**: Automotive Requirements Engineering Tools
