@@ -12,4 +12,6 @@ xlsxwriter
 #sudo apt install tesseract-ocr poppler-utils python3-pip -y
 #pip3 install streamlit pdf2image pytesseract pillow
 #pip install paddleocr
-#
+
+
+# you can use the lighning ia to run all the content in the notebook you can create a simple account and the free version is enough ghtning.ai if you need more information please check you can contact me imadmaalouf02@gmail.com
