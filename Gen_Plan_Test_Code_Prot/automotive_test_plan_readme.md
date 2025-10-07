@@ -238,10 +238,10 @@ pip install streamlit pandas openpyxl xlsxwriter openai
 
 # Example
 
-![Texte alternatif](./Gen_Plan_Test_Code_Prot/R_T_P_Without_Image.png)
+![Texte alternatif](./R_T_P_Without_Image.png)
 
 
-![Texte alternatif](./Gen_Plan_Test_Code_Prot/result.png)  
+![Texte alternatif](./result.png)  
 ---
 
 
