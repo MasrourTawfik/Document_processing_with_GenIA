@@ -347,6 +347,6 @@ streamlit run app.py
 # Example 
 
 
-![input](Gen_Plan_Test/analyse_image.png)
-![analyse](Gen_Plan_Test/analyse_Image.png)
-![result](Gen_Plan_Test/reslt_P_T_With_Image.png)
+![Texte alternatif](./Gen_Plan_Test/analyse_image.png)
+![Texte alternatif](./Gen_Plan_Test/analyse_Image.png)
+![Texte alternatif](./Gen_Plan_Test/reslt_P_T_With_Image.png)
